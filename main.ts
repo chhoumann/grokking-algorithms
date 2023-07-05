@@ -5,6 +5,7 @@ import { breadthFirstSearch, depthFirstSearch } from "./graphsearch.ts";
 import { LinkedList } from "./linkedlist.ts";
 import { quickSort } from "./quicksort.ts";
 import { selectionSort } from "./selectionsort.ts";
+import { findMinSetCover } from "./setcover.ts";
 import { WeightedDirectedGraph } from "./weightedgraph.ts";
 
 if (import.meta.main) {
@@ -98,4 +99,11 @@ if (import.meta.main) {
         "Golden Gate Bridge"
     );
     console.log(`Dijkstra's Algorithm has cost ${distance} via path: ${path.join(" -> ")}.`);
+
+    /* --- Greedy Set Cover --- */
+    const universe = [1, 2, 3, 4, 5];
+    const sets = [[1, 2, 3], [2, 4], [3, 4], [4, 5]];
+    console.log("Universe:", universe);
+    console.log("Sets:", sets);
+    console.log("Greedy set cover:", findMinSetCover(universe, sets));
 }
