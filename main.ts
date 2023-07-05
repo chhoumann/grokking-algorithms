@@ -1,9 +1,11 @@
 import { binarySearch } from "./binarysearch.ts";
+import { dijkstra } from "./dijkstra.ts";
 import { DirectedGraph } from "./graph.ts";
 import { breadthFirstSearch, depthFirstSearch } from "./graphsearch.ts";
 import { LinkedList } from "./linkedlist.ts";
 import { quickSort } from "./quicksort.ts";
 import { selectionSort } from "./selectionsort.ts";
+import { WeightedDirectedGraph } from "./weightedgraph.ts";
 
 if (import.meta.main) {
     /* --- Binary Search --- */
@@ -70,4 +72,30 @@ if (import.meta.main) {
         "Depth First Search:",
         depthFirstSearch(graph, "you", (node) => node === "jonny")
     );
+
+    /* --- Dijkstra's Algorithm --- */
+    const graph2 = new WeightedDirectedGraph<string>();
+    graph2
+        .addNode("Twin Peaks")
+        .addNode("A")
+        .addNode("B")
+        .addNode("C")
+        .addNode("D")
+        .addNode("E")
+        .addNode("Golden Gate Bridge")
+        .addEdge("Twin Peaks", "A", 4)
+        .addEdge("Twin Peaks", "B", 10)
+        .addEdge("A", "D", 21)
+        .addEdge("B", "C", 5)
+        .addEdge("B", "E", 8)
+        .addEdge("C", "D", 5)
+        .addEdge("E", "D", 12)
+        .addEdge("D", "Golden Gate Bridge", 4);
+
+    const { distance, path } = dijkstra(
+        graph2,
+        "Twin Peaks",
+        "Golden Gate Bridge"
+    );
+    console.log(`Dijkstra's Algorithm has cost ${distance} via path: ${path.join(" -> ")}.`);
 }

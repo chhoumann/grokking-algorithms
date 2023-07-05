@@ -1,15 +1,17 @@
-export class DirectedGraph<T> {
-    private graph: Map<T, T[]> = new Map();
+type Edge<T> = { value: T; weight: number };
+
+export class WeightedDirectedGraph<T> {
+    private graph: Map<T, Edge<T>[]> = new Map();
 
     public getNodes(): T[] {
         return [...this.graph.keys()];
     }
 
-    public getEdges(from: T): T[] {
+    public getEdges(from: T): Edge<T>[] {
         return this.graph.get(from) || [];
     }
 
-    public addNode(value: T): DirectedGraph<T> {
+    public addNode(value: T): WeightedDirectedGraph<T> {
         if (!this.graph.has(value)) {
             this.graph.set(value, []);
         }
@@ -17,17 +19,17 @@ export class DirectedGraph<T> {
         return this;
     }
 
-    public addEdge(from: T, to: T): DirectedGraph<T> {
-        this.graph.set(from, [...(this.graph.get(from) || []), to]);
+    public addEdge(from: T, to: T, weight: number): WeightedDirectedGraph<T> {
+        this.graph.set(from, [...(this.graph.get(from) || []), { value: to, weight }]);
 
         return this;
     }
 
     public hasEdge(from: T, to: T): boolean {
-        return this.graph.get(from)?.includes(to) || false;
+        return this.graph.get(from)?.map(x => x.value).includes(to) || false;
     }
 
-    public removeEdge(from: T, to: T): DirectedGraph<T> {
+    public removeEdge(from: T, to: T): WeightedDirectedGraph<T> {
         if (!this.graph.has(from)) {
             throw new Error("Node does not exist");
         }
