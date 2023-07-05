@@ -1,5 +1,6 @@
 import { binarySearch } from "./binarysearch.ts";
 import { LinkedList } from "./linkedlist.ts";
+import { quickSort } from "./quicksort.ts";
 import { selectionSort } from "./selectionsort.ts";
 
 if (import.meta.main) {
@@ -21,4 +22,10 @@ if (import.meta.main) {
     const ss_l_copy = [...ss_l];
 
     console.log("Selection Sort:\n", selectionSort(ss_l), "\n", ss_l_copy);
+
+    /* --- Quick Sort --- */
+    const qs_l = new Array(10).fill(0).map(() => Math.floor(Math.random() * 100));
+    const qs_l_copy = [...qs_l];
+
+    console.log("Quick Sort:\n", quickSort(qs_l), "\n", qs_l_copy);
 }
