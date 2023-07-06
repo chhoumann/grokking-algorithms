@@ -2,6 +2,7 @@ import { binarySearch } from "./binarysearch.ts";
 import { dijkstra } from "./dijkstra.ts";
 import { DirectedGraph } from "./graph.ts";
 import { breadthFirstSearch, depthFirstSearch } from "./graphsearch.ts";
+import { knapsack } from "./knapsack.ts";
 import { LinkedList } from "./linkedlist.ts";
 import { quickSort } from "./quicksort.ts";
 import { selectionSort } from "./selectionsort.ts";
@@ -100,10 +101,22 @@ if (import.meta.main) {
     );
     console.log(`Dijkstra's Algorithm has cost ${distance} via path: ${path.join(" -> ")}.`);
 
-    /* --- Greedy Set Cover --- */
+    /* --- Greedy Programming: Set Cover --- */
     const universe = [1, 2, 3, 4, 5];
     const sets = [[1, 2, 3], [2, 4], [3, 4], [4, 5]];
     console.log("Universe:", universe);
     console.log("Sets:", sets);
     console.log("Greedy set cover:", findMinSetCover(universe, sets));
+
+    /* --- Dynamic Programming: Knapsack --- */
+    const maxValue = knapsack([
+        { name: "guitar", weight: 1, value: 1500 },
+        { name: "stereo", weight: 4, value: 3000 },
+        { name: "laptop", weight: 3, value: 2000 },
+        // Without the iPhone, the knapsack would be filled with the laptop and the guitar ($3500)
+        // With the iPhone, the knapsack would be filled with the laptop and the iPhone ($4000)
+        { name: "iphone", weight: 1, value: 2000 },
+    ], 4);
+
+    console.log("Max value:", maxValue);
 }
